@@ -22,7 +22,13 @@ def check_object_exists(bucket, key):
 def lambda_handler(event, context):
 
     # s3 307 answer
-    key = event['queryStringParameters']['key']
+    try:
+        key = event['queryStringParameters']['key']
+    except NameError as e:
+        return {
+            "statucCode" : "404",
+            "body" : "Can not find the key."
+        }
     print("key: "+key)
     match = re.search('((\d+)[a-zA-Z](\d+))\/(.*)',key)
     
@@ -31,7 +37,7 @@ def lambda_handler(event, context):
         print("size chart: "+match.group(1))
         return {
             'statusCode' : '404',
-            'body' : key + ' Sizechart not found.'
+            'body' : 'Sizechart not found.'
         }
 
     width = int(match.group(2))
@@ -53,7 +59,7 @@ def lambda_handler(event, context):
         if check_object_exists(origin_bucket, key) == False :
             return {
                 'statusCode' : '404',
-                'body' : key + 'Image not found.'
+                'body' : 'Image name not found.'
             }
 
         # get original's images
