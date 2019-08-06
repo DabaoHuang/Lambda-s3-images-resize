@@ -9,6 +9,7 @@ source_bucket     = os.environ['SOURCE_BUCKET']
 source_prefix_key = os.environ['SOURCE_PREFIX']
 target_bucket     = os.environ['TARGET_BUCKET']
 target_prefix_key = os.environ['TARGET_PREFIX']
+source_replace    = os.environ['SOURCE_REPLACE']
 sizechart         = os.environ['SIZECHART']
 
 def check_object_exists(bucket, key):
@@ -32,6 +33,13 @@ def lambda_handler(event, context):
     print("key: "+key)
     match = re.search('((\d+)[a-zA-Z](\d+))\/(.*)',key)
     
+    # Check value
+    if match == None :
+        return {
+            'statusCode' : '404',
+            'body' : 'Key is invalid.'
+        }
+
     # check in size chart
     if match.group(1) not in sizechart.split(',') :
         print("size chart: "+match.group(1))
@@ -44,6 +52,8 @@ def lambda_handler(event, context):
     height = int(match.group(3))
     extension = os.path.splitext(key)[1].lower()
     key = str(match.group(4))
+    if source_replace != '':
+        key = re.sub(r'(http|https)://'+source_replace+source_prefix_key,'',key)
     # path: prefix/WxH/W_H_key
     putkey = target_prefix_key + str(width) + "x" + str(height) + "/" + str(width) + '_' + str(height) + '_' + key
     key = source_prefix_key + key
