@@ -13,11 +13,13 @@
 ![Size](https://img.shields.io/badge/size-5.5MB-lightgrey)
 [![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/Naereen/StrapDown.js/blob/master/LICENSE)
 
-## How to use?
+## How to use ? 
+Compress in zip
 ```
-$ zip -r code.zip
+$ cd path
+$ zip -r -9 -x '*.git/*' imgresize.$(date +%Y%m%d%H%M).zip .
 ```
-Upload to AWS Lambda function
+Upload to AWS Lambda function after
 
 ## Environment variables
 ![Environment variables](./Environment.jpg)
@@ -61,7 +63,7 @@ Must be attach a ROLE from below policy to AWS Lambda function.
 
 Use CLI to get CONVER_TO_BINARRY.
 ```
-aws apigateway update-integration-response \
+$ aws apigateway update-integration-response \
         --rest-api-id xxxxxx \
         --resource-id xxxxxx \
         --http-method [ ANY | GET | POST ] \

@@ -5,11 +5,11 @@ import boto3, botocore, os, re, base64
 s3 = boto3.resource('s3')
 
 # Lambda Environment Variables
-origin_bucket = os.environ['SOURCE_BUCKET']
-origin_prefix_key = os.environ['SOURCE_PREFIX']
-target_bucket = os.environ['TARGET_BUCKET']
+source_bucket     = os.environ['SOURCE_BUCKET']
+source_prefix_key = os.environ['SOURCE_PREFIX']
+target_bucket     = os.environ['TARGET_BUCKET']
 target_prefix_key = os.environ['TARGET_PREFIX']
-sizechart = os.environ['SIZECHART']
+sizechart         = os.environ['SIZECHART']
 
 def check_object_exists(bucket, key):
     try:
@@ -46,7 +46,7 @@ def lambda_handler(event, context):
     key = str(match.group(4))
     # path: prefix/WxH/W_H_key
     putkey = target_prefix_key + str(width) + "x" + str(height) + "/" + str(width) + '_' + str(height) + '_' + key
-    key = origin_prefix_key + key
+    key = source_prefix_key + key
 
     if extension in ['.jpeg', '.jpg']:
         format = 'JPEG'
@@ -56,7 +56,7 @@ def lambda_handler(event, context):
     # check object exists
     if check_object_exists(target_bucket, putkey) == False :
         
-        if check_object_exists(origin_bucket, key) == False :
+        if check_object_exists(source_bucket, key) == False :
             return {
                 'statusCode' : '404',
                 'body' : 'Image name not found.'
@@ -64,7 +64,7 @@ def lambda_handler(event, context):
 
         # get original's images
         obj = s3.Object(
-            bucket_name=origin_bucket,
+            bucket_name=source_bucket,
             key=key
         )
 
