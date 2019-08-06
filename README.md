@@ -21,6 +21,11 @@ $ zip -r -9 -x '*.git/*' imgresize.$(date +%Y%m%d%H%M).zip .
 ```
 Upload to AWS Lambda function after
 
+Ex. **https://[YOUR_API_GATE_WAY_URL_OR_CLOUDFRONT_URL]/SIZECHART/[IMAGE_FILE_NAME_OR_SOURCE_LINK]**
+
+Like this : https://apigateway.com/300x300/SOURCE.jpg
+OR this : https://apigateway.com/300x300/https://SOURCEIMAGE/SOURCE.jpg
+
 ## Environment variables
 ![Environment variables](./Environment.jpg)
  - SIZECHART - Split with ','. ex: 300x300,100x100...
@@ -28,6 +33,7 @@ Upload to AWS Lambda function after
  - SOURCE_PREFIX - Your source prefix path.
  - TARGET_BUCKET - Your target s3 bucket.
  - TARGET_PREFIX - Your target prefix path.
+ - SOURCE_REPLACE - If your source is a url, You can paste a domain & '/' to replace it without 'http://' or 'https://'.
 
 ## Execution role
 Must be attach a ROLE from below policy to AWS Lambda function.
