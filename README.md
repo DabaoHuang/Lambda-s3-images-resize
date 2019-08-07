@@ -24,7 +24,7 @@ Upload to AWS Lambda function after
 Ex. **https://[YOUR_API_GATE_WAY_URL_OR_CLOUDFRONT_URL]/SIZECHART/[IMAGE_FILE_NAME_OR_SOURCE_LINK]**
 
 Like this : https://apigateway.com/300x300/SOURCE.jpg
-OR this : https://apigateway.com/300x300/https://SOURCEIMAGE/SOURCE.jpg
+OR this : https://apigateway.com/300x300/https://SOURCE_BUCKET/SOURCE_PREFIX/SOURCE.jpg
 
 ## Environment variables
 ![Environment variables](./Environment.jpg)
