@@ -11,7 +11,7 @@
 ![Build](https://img.shields.io/badge/Build-success-green)
 ![Language](https://img.shields.io/badge/python-3.6-blue)
 ![Size](https://img.shields.io/badge/size-5.5MB-lightgrey)
-[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/Naereen/StrapDown.js/blob/master/LICENSE)
+[![GitHub license](https://img.shields.io/github/license/DabaoHuang/Lambda-s3-images-resize.svg)](https://github.com/DabaoHuang/Lambda-s3-images-resize/blob/master/LICENSE)
 
 ## How to use ? 
 Compress in zip
